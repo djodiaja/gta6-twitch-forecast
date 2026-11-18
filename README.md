@@ -1,10 +1,10 @@
+[![make.fun · gta6-twitch-ccu-forecast-01](https://make.fun/badge/gta6-twitch-ccu-forecast-01.svg)](https://make.fun/bounty/gta6-twitch-ccu-forecast-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-twitch-ccu-forecast-01)
+[![rank](https://make.fun/badge/gta6-twitch-ccu-forecast-01/djodiaja/gta6-twitch-forecast/rank.svg)](https://make.fun/bounty/gta6-twitch-ccu-forecast-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-twitch-ccu-forecast-01)
+[![reward](https://make.fun/badge/gta6-twitch-ccu-forecast-01/djodiaja/gta6-twitch-forecast/reward.svg)](https://make.fun/bounty/gta6-twitch-ccu-forecast-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-twitch-ccu-forecast-01)
+
 # GTA VI Twitch CCU Forecast
 
-![make.fun competition](https://make.fun/badge/competition/gta6-twitch-ccu-forecast-01)
-![make.fun rank](https://make.fun/badge/rank/gta6-twitch-ccu-forecast-01)
-![make.fun reward](https://make.fun/badge/reward/gta6-twitch-ccu-forecast-01)
-
-Forecasts GTA VI Twitch concurrent viewer counts for hours 2-24 of launch day, given hour 1 data and comparable game launch histories.
+Entry for the [Forecast GTA VI's launch-day Twitch viewers hour by hour](https://make.fun/bounty/gta6-twitch-ccu-forecast-01?ref=vkeq2szk) bounty on make.fun.
 
 ## Strategy
 
@@ -17,8 +17,10 @@ Uses a **comparable-based growth curve model**:
 
 This beats the baseline persistence forecast because major game launches follow predictable intraday patterns.
 
-## Usage
+## Run
 
-```bash
+```sh
 MAKEFUN_INPUT_DIR=./input MAKEFUN_OUTPUT_DIR=./output python3 main.py
 ```
+
+Referral code: `vkeq2szk`
