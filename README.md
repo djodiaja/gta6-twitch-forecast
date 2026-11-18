@@ -13,14 +13,16 @@ Uses a **comparable-based growth curve model**:
 1. Extracts hourly viewer trajectories from comparable game launches (e.g. Elden Ring)
 2. Computes log-scale growth ratios (hour_h / hour_1) across all comparables
 3. Applies empirical quantiles of those ratios to the hour-1 observation
-4. Falls back to persistence with drift for hours without comparable data
+4. Falls back to persistence with drift (sigma = 0.20, widening with sqrt of the horizon) for hours with fewer than two comparable samples
 
-This beats the baseline persistence forecast because major game launches follow predictable intraday patterns.
+Quantiles are rounded half-up to 2 decimals and forced to be monotonic.
 
 ## Run
 
 ```sh
 MAKEFUN_INPUT_DIR=./input MAKEFUN_OUTPUT_DIR=./output python3 main.py
 ```
+
+Reads `*.in` cases from the input directory and writes `*.out` quantile forecasts (hours 2-24) to the output directory.
 
 Referral code: `vkeq2szk`
