@@ -2,6 +2,7 @@ import json
 import math
 import os
 import sys
+from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -34,6 +35,10 @@ def quantile_sorted(values, p):
     return values[lo] * (1 - frac) + values[hi] * frac
 
 
+def _parse_ts(s):
+    return datetime.fromisoformat(s.replace("Z", "+00:00"))
+
+
 def extract_launch_day_ratios(comparables, day_start_key="day_start"):
     ratios_by_hour = {}
     for comp in comparables:
@@ -51,22 +56,11 @@ def extract_launch_day_ratios(comparables, day_start_key="day_start"):
                 continue
             if entry_time >= day_start:
                 try:
-                    ds_hour = int(day_start[11:13])
-                    ds_day = int(day_start[8:10])
-                    ds_month = int(day_start[5:7])
-                    e_hour = int(entry_time[11:13])
-                    e_day = int(entry_time[8:10])
-                    e_month = int(entry_time[5:7])
-                    day_diff = 0
-                    if e_month == ds_month:
-                        day_diff = e_day - ds_day
-                    elif e_month > ds_month:
-                        day_diff = e_day + 30 - ds_day
-                    hour_offset = day_diff * 24 + (e_hour - ds_hour)
-                    hour_num = hour_offset + 1
+                    delta = _parse_ts(entry_time) - _parse_ts(day_start)
+                    hour_num = int(delta.total_seconds() // 3600) + 1
                     if 1 <= hour_num <= 24:
                         day_hours[hour_num] = viewers
-                except (ValueError, IndexError):
+                except (ValueError, IndexError, TypeError):
                     continue
         h1 = day_hours.get(1, 0)
         if h1 <= 0:
